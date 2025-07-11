@@ -78,12 +78,14 @@
             margin: 40px auto; /* Center horizontally and provide vertical space */
             overflow: hidden; /* Keep overflow hidden for the card itself to contain its content */
             text-align: center;
-            animation: fadeInScale 1.5s ease-out forwards; /* Smoother, slower entrance animation */
             position: relative;
             z-index: 10;
             border: 4px solid #60a5fa; /* More pronounced border */
             transform-style: preserve-3d; /* For potential 3D effects */
             transition: all 0.5s ease; /* General transition for the card */
+            opacity: 0; /* Initially hidden, controlled by JS for fadeInScale */
+            transform: scale(0.6); /* Initial scale for fadeInScale, controlled by JS */
+            pointer-events: none; /* Initially non-interactive, controlled by JS */
         }
         .card::before {
             content: '';
@@ -105,7 +107,7 @@
             100% { background-position: 100% 50%; }
         }
 
-        /* Card entrance animation */
+        /* Card entrance animation - Applied by JS */
         @keyframes fadeInScale {
             from {
                 opacity: 0;
@@ -125,7 +127,6 @@
             border-top-left-radius: 33px;
             border-top-right-radius: 33px;
             position: relative;
-            /* Removed 'overflow: hidden;' to allow the profile circle to be fully visible */
             box-shadow: inset 0 -15px 30px rgba(0, 0, 0, 0.2); /* More pronounced inner shadow */
             background-size: 200% 200%; /* For gradient movement */
             animation: headerGradientShift 10s infinite alternate ease-in-out;
@@ -398,9 +399,74 @@
             object-fit: cover; /* Ensure image covers the circle without distortion */
             border-radius: 50%;
         }
+
+        /* Preloader styles */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #a7e6ff 0%, #7dc9ff 50%, #4a90e2 100%); /* Match body background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999; /* Ensure it's on top */
+            opacity: 1;
+            transition: opacity 1s ease-out; /* Smooth fade out */
+        }
+
+        .preloader.hidden {
+            opacity: 0;
+            pointer-events: none; /* Make it non-interactive after fade out */
+        }
+
+        .preloader-text {
+            font-family: 'Great Vibes', cursive; /* Elegant font */
+            font-size: 5rem; /* Large text */
+            color: #ffffff; /* White text */
+            text-shadow: 0 0 10px rgba(255,255,255,0.8), 0 0 20px rgba(255,255,255,0.6); /* Glow effect */
+            opacity: 0;
+            transform: scale(0.8);
+            animation: textAppearAndFade 2.5s forwards; /* Animation for text */
+        }
+
+        @keyframes textAppearAndFade {
+            0% { opacity: 0; transform: scale(0.8); }
+            20% { opacity: 1; transform: scale(1); }
+            80% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(1.2); }
+        }
+
+        /* Watermark styles */
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg); /* Center and rotate */
+            font-family: 'Inter', sans-serif; /* Or another elegant font */
+            font-size: 6rem; /* Increased font size for more visibility */
+            color: rgba(0, 0, 0, 0.25); /* Increased visibility */
+            pointer-events: none; /* Ensure it doesn't block clicks */
+            user-select: none; /* Prevent text selection */
+            z-index: 5; /* Below content, above card background */
+            white-space: nowrap; /* Prevent text wrapping */
+        }
+
+        /* Responsive adjustment for watermark on smaller screens */
+        @media (max-width: 640px) {
+            .watermark {
+                font-size: 3.5rem; /* Adjusted smaller font for mobile */
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <span class="preloader-text">Invitación</span>
+    </div>
+
     <!-- Floating background bubbles -->
     <div class="bubble"></div>
     <div class="bubble"></div>
@@ -410,6 +476,9 @@
     <div class="bubble"></div>
 
     <div class="card">
+        <!-- Watermark -->
+        <div class="watermark">4471660425</div>
+
         <div class="header">
             <!-- Circle for the celebrant's photo -->
             <div class="profile-circle" style="background-image: url('https://placehold.co/150x150/cccccc/ffffff?text=Tu+Foto');">
@@ -456,7 +525,7 @@
             </div>
 
             <!-- Updated WhatsApp button -->
-            <a href="https://wa.me/524471660425?text=Hola%2C%20me%20gustaria%C3%ADa%20información%20de%20las%20%20invitaciones." target="_blank" class="rsvp-button">
+            <a href="https://wa.me/524471660425?text=Hola%2C%20me%20gustar%C3%ADa%20confirmar%20mi%20asistencia%20al%20evento." target="_blank" class="rsvp-button">
                 <i class="fab fa-whatsapp"></i> 4471660425
             </a>
             <p class="contact-text">
@@ -464,5 +533,32 @@
             </p>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const preloader = document.querySelector('.preloader');
+            const invitationCard = document.querySelector('.card');
+
+            // Initially hide the card (CSS handles this with opacity: 0; and animation: none;)
+            // We will add a class to trigger the animation later.
+            // For now, let's ensure the card is hidden by default in CSS and only revealed by JS.
+            invitationCard.style.opacity = '0'; // Ensure it's hidden from start
+            invitationCard.style.transform = 'scale(0.6)'; // Initial scale for fadeInScale
+            invitationCard.style.pointerEvents = 'none';
+
+            setTimeout(() => {
+                preloader.style.opacity = '0'; // Start fading out preloader
+
+                preloader.addEventListener('transitionend', () => {
+                    preloader.style.display = 'none'; // Completely remove preloader from flow
+                    invitationCard.style.opacity = '1'; // Make card visible
+                    invitationCard.style.transform = 'scale(1)'; // Final scale for fadeInScale
+                    invitationCard.style.pointerEvents = 'auto'; // Make card interactive
+                    invitationCard.style.animation = 'fadeInScale 1.5s ease-out forwards'; // Trigger card animation
+                }, { once: true });
+
+            }, 2500); // Preloader text animation duration
+        });
+    </script>
 </body>
 </html>
