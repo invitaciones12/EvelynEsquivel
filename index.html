@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Te Invito!</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Pacifico&family=Great+Vibes&display=swap" rel="stylesheet">
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* General body styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #a7e6ff 0%, #7dc9ff 50%, #4a90e2 100%); /* More vibrant background gradient */
+            display: block; /* Changed from flex to block for better scroll */
+            min-height: 100vh;
+            margin: 0;
+            padding: 40px 20px; /* Added vertical padding for space */
+            box-sizing: border-box;
+            position: relative;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            overflow-y: auto; /* Allow vertical scroll if content is long */
+        }
+
+        /* Background animation with particles/stars and bubbles */
+        body::before {
+            content: '';
+            position: fixed; /* Changed to fixed so background doesn't move with scroll */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top left, rgba(255,255,255,0.1) 0%, transparent 40%),
+                        radial-gradient(circle at bottom right, rgba(255,255,255,0.1) 0%, transparent 40%);
+            animation: backgroundShift 20s infinite alternate ease-in-out;
+            z-index: -1;
+        }
+
+        /* Floating bubbles/confetti animation */
+        .bubble {
+            position: fixed; /* Changed to fixed so bubbles don't move with scroll */
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            opacity: 0;
+            animation: floatBubble 15s infinite ease-in-out;
+            pointer-events: none; /* Non-interactive */
+            z-index: -1; /* Ensure they are behind the content */
+        }
+        .bubble:nth-child(1) { width: 40px; height: 40px; left: 10%; top: 20%; animation-delay: 0s; }
+        .bubble:nth-child(2) { width: 60px; height: 60px; left: 80%; top: 50%; animation-delay: 2s; background-color: rgba(255, 255, 255, 0.2); }
+        .bubble:nth-child(3) { width: 30px; height: 30px; left: 30%; top: 70%; animation-delay: 4s; }
+        .bubble:nth-child(4) { width: 50px; height: 50px; left: 50%; top: 10%; animation-delay: 6s; background-color: rgba(255, 255, 255, 0.4); }
+        .bubble:nth-child(5) { width: 70px; height: 70px; left: 20%; top: 90%; animation-delay: 8s; }
+        .bubble:nth-child(6) { width: 45px; height: 45px; left: 90%; top: 30%; animation-delay: 10s; background-color: rgba(255, 255, 255, 0.25); }
+
+
+        @keyframes backgroundShift {
+            0% { background-position: 0% 50%, 100% 50%; }
+            100% { background-position: 100% 50%, 0% 50%; }
+        }
+
+        @keyframes floatBubble {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; }
+        }
+
+        /* Main card styles */
+        .card {
+            background-color: #ffffff;
+            border-radius: 35px; /* Even more rounded corners */
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4); /* Deeper, softer shadow */
+            max-width: 800px; /* Increased max-width for more space */
+            width: 100%;
+            margin: 40px auto; /* Center horizontally and provide vertical space */
+            overflow: hidden; /* Keep overflow hidden for the card itself to contain its content */
+            text-align: center;
+            animation: fadeInScale 1.5s ease-out forwards; /* Smoother, slower entrance animation */
+            position: relative;
+            z-index: 10;
+            border: 4px solid #60a5fa; /* More pronounced border */
+            transform-style: preserve-3d; /* For potential 3D effects */
+            transition: all 0.5s ease; /* General transition for the card */
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 35px;
+            padding: 5px; /* Creates an animated border */
+            background: linear-gradient(45deg, #ff6b6b, #ffa07a, #ff6347, #ff6b6b);
+            background-size: 200% 200%; /* For gradient movement */
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: borderPulse 3s infinite alternate ease-in-out;
+            z-index: -1;
+        }
+
+        @keyframes borderPulse {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        /* Card entrance animation */
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.6);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Header styles */
+        .header {
+            background: linear-gradient(45deg, #ff6b6b 0%, #ffa07a 50%, #ff6347 100%); /* Festive red-orange gradient */
+            color: white;
+            padding: 60px 20px 100px; /* More bottom padding for the photo */
+            border-top-left-radius: 33px;
+            border-top-right-radius: 33px;
+            position: relative;
+            /* Removed 'overflow: hidden;' to allow the profile circle to be fully visible */
+            box-shadow: inset 0 -15px 30px rgba(0, 0, 0, 0.2); /* More pronounced inner shadow */
+            background-size: 200% 200%; /* For gradient movement */
+            animation: headerGradientShift 10s infinite alternate ease-in-out;
+        }
+
+        @keyframes headerGradientShift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        .header h1 {
+            font-family: 'Great Vibes', cursive; /* Elegant and festive font */
+            font-size: 5rem; /* Much larger font size */
+            font-weight: 900; /* Bolder */
+            margin-bottom: 20px;
+            text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 255, 255, 0.9); /* More intense shadow and glow */
+            animation: slideInDownHeader 1.8s ease-out forwards, glowText 3.5s infinite alternate;
+        }
+        .header p {
+            font-family: 'Pacifico', cursive; /* Complementary font */
+            font-size: 1.8rem; /* Larger font size */
+            font-weight: 600;
+            animation: slideInDownHeader 2.1s ease-out forwards;
+        }
+
+        /* Header animation */
+        @keyframes slideInDownHeader {
+            from {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        @keyframes glowText {
+            0% { text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 255, 255, 0.7); }
+            100% { text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5), 0 0 35px rgba(255, 255, 255, 1); }
+        }
+
+        /* Main content */
+        .content {
+            padding: 100px 50px 50px; /* Increased top padding to push content down */
+        }
+        .content h2 {
+            font-size: 2.8rem; /* Larger font size */
+            color: #2c3e50; /* Dark text color */
+            margin-bottom: 35px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+            animation: fadeIn 1.8s ease-out forwards;
+        }
+
+        /* General fade-in animation */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Info grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 35px; /* Space between items */
+            margin-bottom: 45px;
+        }
+        @media (min-width: 640px) {
+            .info-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        .info-item {
+            background-color: #e8f5e9; /* Light green background */
+            padding: 30px; /* More padding */
+            border-radius: 25px; /* More rounded corners */
+            font-size: 1.4rem; /* Larger font size */
+            color: #2e7d32; /* Dark green text */
+            font-weight: 700;
+            border: 3px solid #81c784; /* More pronounced border */
+            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55), box-shadow 0.5s ease; /* Elastic transition */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            animation: fadeInUpItem 1.2s ease-out forwards; /* Entrance animation */
+            opacity: 0; /* Initially hidden for animation */
+            transform: translateY(30px);
+            position: relative;
+            overflow: hidden;
+        }
+        .info-item:nth-child(1) { animation-delay: 0.5s; }
+        .info-item:nth-child(2) { animation-delay: 0.7s; }
+        .info-item:nth-child(3) { animation-delay: 0.9s; }
+        .info-item:nth-child(4) { animation-delay: 1.1s; }
+
+        @keyframes fadeInUpItem {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .info-item:hover {
+            transform: translateY(-12px) scale(1.05) rotate(2deg); /* Lift, grow, and rotate effect */
+            box-shadow: 0 15px 40px rgba(46, 125, 50, 0.4); /* Shadow on hover */
+            background-color: #c8e6c9; /* Color change on hover */
+        }
+        .info-item span {
+            display: block;
+            font-size: 1.2rem; /* Larger font size */
+            color: #66bb6a; /* Softer text color */
+            margin-top: 12px;
+            font-weight: 500;
+        }
+        .info-item i {
+            font-size: 2.5rem; /* Icon size */
+            color: #43a047; /* Icon color */
+            margin-bottom: 15px;
+            animation: bounceIcon 2.5s infinite ease-in-out; /* Subtle bounce animation */
+        }
+        @keyframes bounceIcon {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* Custom phrase section */
+        .fact-section {
+            background-color: #fffde7; /* Very light yellow background */
+            padding: 35px; /* More padding */
+            border-radius: 25px; /* More rounded corners */
+            margin-top: 35px;
+            border: 4px dashed #ffd600; /* More visible dashed border */
+            animation: pulseBorderFact 3s infinite alternate, shineFact 5s infinite ease-in-out; /* Pulse and shine animation */
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.4); /* Additional shadow */
+        }
+        @keyframes pulseBorderFact {
+            0% { border-color: #ffd600; box-shadow: 0 0 15px rgba(255, 215, 0, 0.6); }
+            100% { border-color: #ffc107; box-shadow: 0 0 30px rgba(255, 193, 7, 0.8); }
+        }
+        @keyframes shineFact {
+            0% { background-position: -250% 0; }
+            100% { background-position: 250% 0; }
+        }
+        .fact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transform: skewX(-25deg);
+            animation: shineFact 5s infinite ease-in-out;
+        }
+
+        .fact-section p {
+            font-style: italic;
+            color: #bf360c; /* Dark orange text */
+            font-size: 1.3rem; /* Larger font size */
+            line-height: 1.7;
+            position: relative;
+            z-index: 1; /* Ensure text is above shine */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+        }
+        .fact-section p strong {
+            color: #a11c00; /* Stronger color for the phrase */
+        }
+
+        /* RSVP Button */
+        .rsvp-button {
+            background: linear-gradient(45deg, #4caf50 0%, #8bc34a 100%); /* More vibrant green gradient */
+            color: white;
+            padding: 22px 45px; /* More padding */
+            border-radius: 18px; /* More rounded corners */
+            text-decoration: none;
+            font-size: 1.6rem; /* Much larger font size */
+            font-weight: 900;
+            display: inline-flex; /* For icon and text alignment */
+            align-items: center;
+            justify-content: center;
+            margin-top: 45px;
+            transition: background-color 0.5s ease, transform 0.4s ease, box-shadow 0.5s ease;
+            box-shadow: 0 12px 35px rgba(76, 175, 80, 0.7); /* Larger, colorful shadow */
+            position: relative;
+            overflow: hidden;
+            animation: pulseButton 2.5s infinite ease-in-out; /* Constant pulse animation */
+            border: 2px solid #66bb6a; /* Subtle border */
+        }
+        .rsvp-button i {
+            margin-right: 18px; /* Space between icon and text */
+            font-size: 2rem; /* WhatsApp icon size */
+            animation: rotateIcon 3s infinite linear; /* Subtle icon rotation animation */
+        }
+        @keyframes rotateIcon {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .rsvp-button:hover {
+            background: linear-gradient(45deg, #66bb6a 0%, #aed581 100%);
+            transform: translateY(-10px) scale(1.07) rotateX(5deg); /* Lift, grow, and slight 3D rotation effect */
+            box-shadow: 0 18px 50px rgba(76, 175, 80, 0.9);
+        }
+        /* Shine effect on button hover */
+        .rsvp-button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -200%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.4);
+            transform: skewX(-35deg);
+            transition: all 0.8s ease;
+        }
+        .rsvp-button:hover::after {
+            left: 200%;
+        }
+
+        @keyframes pulseButton {
+            0% { transform: scale(1); box-shadow: 0 12px 35px rgba(76, 175, 80, 0.7); }
+            50% { transform: scale(1.03); box-shadow: 0 15px 40px rgba(76, 175, 80, 0.9); }
+            100% { transform: scale(1); box-shadow: 0 12px 35px rgba(76, 175, 80, 0.7); }
+        }
+
+        /* "Contact me" text */
+        .contact-text {
+            color: #424242; /* Dark gray */
+            font-size: 1.2rem; /* Slightly larger font size */
+            font-weight: 700;
+            margin-top: 25px; /* Top space, adjusted to compensate for removed text */
+            animation: fadeIn 2s ease-out forwards; /* Fade-in animation */
+        }
+
+        /* Photo circle styles */
+        .profile-circle {
+            width: 150px; /* Circle size */
+            height: 150px;
+            border-radius: 50%; /* Make it circular */
+            background-color: #f0f0f0; /* Placeholder background */
+            border: 5px solid #ffffff; /* White border */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Shadow */
+            position: absolute; /* Absolute positioning */
+            bottom: -75px; /* Half of the circle outside the header */
+            left: 50%;
+            transform: translateX(-50%); /* Center horizontally */
+            overflow: hidden; /* Clip image inside the circle */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            color: #b0b0b0;
+            text-align: center;
+            background-size: cover; /* Ensure image covers the circle */
+            background-position: center; /* Center the image */
+            transition: transform 0.3s ease-in-out;
+            z-index: 15; /* Ensure it's above other elements */
+        }
+
+        .profile-circle:hover {
+            transform: translateX(-50%) scale(1.05) rotate(5deg); /* Effect on hover */
+        }
+
+        .profile-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensure image covers the circle without distortion */
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating background bubbles -->
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+
+    <div class="card">
+        <div class="header">
+            <!-- Circle for the celebrant's photo -->
+            <div class="profile-circle" style="background-image: url('https://placehold.co/150x150/cccccc/ffffff?text=Tu+Foto');">
+                <!-- You can replace the placeholder image URL with the actual celebrant's photo -->
+                <!-- <img src="URL_DE_LA_FOTO_DEL_FESTEJADO.jpg" alt="Foto del Festejado"> -->
+            </div>
+
+            <!-- Invitation title, can be changed for birthday, graduation, etc. -->
+            <h1>¡Gran Celebración!</h1>
+            <p>Un evento que no querrás perderte</p>
+        </div>
+        <div class="content">
+            <!-- Event title -->
+            <h2>[Tu Evento: Cumpleaños / Graduación / Celebración]</h2>
+
+            <p class="text-gray-700 text-xl mb-8 leading-relaxed font-medium">
+                ¡Prepárate para una jornada llena de alegría, risas, música y momentos inolvidables!
+                Tu presencia es el mejor regalo y hará de este día algo aún más especial.
+            </p>
+
+            <div class="info-grid">
+                <div class="info-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    Fecha: <br> <span>[Día, DD de Mes de AAAA]</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-clock"></i>
+                    Hora: <br> <span>[HH:MM AM/PM]</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    Lugar: <br> <span>[Nombre del Lugar]</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-location-arrow"></i>
+                    Dirección: <br> <span>[Calle, Número, Colonia, Maravatío, Michoacán]</span>
+                </div>
+            </div>
+
+            <div class="fact-section">
+                <p>
+                    ✨ <strong>Frase que desees a tu gusto:</strong> ¡La vida es una fiesta, y tú eres nuestro invitado de honor! ✨
+                </p>
+            </div>
+
+            <!-- Updated WhatsApp button -->
+            <a href="https://wa.me/524471660425?text=Hola%2C%20me%20gustar%C3%ADa%20confirmar%20mi%20asistencia%20al%20evento." target="_blank" class="rsvp-button">
+                <i class="fab fa-whatsapp"></i> 4471660425
+            </a>
+            <p class="contact-text">
+                Contáctame
+            </p>
+        </div>
+    </div>
+</body>
+</html>
