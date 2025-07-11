@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¡Te Invito!</title>
+    <title>¡Baby Shower!</title>
     <!-- Carga de Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Pacifico&family=Great+Vibes&display=swap" rel="stylesheet">
@@ -13,21 +13,22 @@
         /* General body styles */
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #a7e6ff 0%, #7dc9ff 50%, #4a90e2 100%); /* More vibrant background gradient */
-            display: block; /* Changed from flex to block for better scroll */
+            /* Suave gradiente de fondo para baby shower */
+            background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 50%, #80deea 100%);
+            display: block;
             min-height: 100vh;
             margin: 0;
-            padding: 40px 20px; /* Added vertical padding for space */
+            padding: 40px 20px;
             box-sizing: border-box;
             position: relative;
-            overflow-x: hidden; /* Prevent horizontal scroll */
-            overflow-y: auto; /* Allow vertical scroll if content is long */
+            overflow-x: hidden;
+            overflow-y: auto;
         }
 
         /* Background animation with particles/stars and bubbles */
         body::before {
             content: '';
-            position: fixed; /* Changed to fixed so background doesn't move with scroll */
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -40,20 +41,20 @@
 
         /* Floating bubbles/confetti animation */
         .bubble {
-            position: fixed; /* Changed to fixed so bubbles don't move with scroll */
-            background-color: rgba(255, 255, 255, 0.3);
+            position: fixed;
+            background-color: rgba(255, 255, 255, 0.4); /* Más visible */
             border-radius: 50%;
             opacity: 0;
             animation: floatBubble 15s infinite ease-in-out;
-            pointer-events: none; /* Non-interactive */
-            z-index: -1; /* Ensure they are behind the content */
+            pointer-events: none;
+            z-index: -1;
         }
         .bubble:nth-child(1) { width: 40px; height: 40px; left: 10%; top: 20%; animation-delay: 0s; }
-        .bubble:nth-child(2) { width: 60px; height: 60px; left: 80%; top: 50%; animation-delay: 2s; background-color: rgba(255, 255, 255, 0.2); }
+        .bubble:nth-child(2) { width: 60px; height: 60px; left: 80%; top: 50%; animation-delay: 2s; background-color: rgba(255, 255, 255, 0.3); }
         .bubble:nth-child(3) { width: 30px; height: 30px; left: 30%; top: 70%; animation-delay: 4s; }
-        .bubble:nth-child(4) { width: 50px; height: 50px; left: 50%; top: 10%; animation-delay: 6s; background-color: rgba(255, 255, 255, 0.4); }
+        .bubble:nth-child(4) { width: 50px; height: 50px; left: 50%; top: 10%; animation-delay: 6s; background-color: rgba(255, 255, 255, 0.5); }
         .bubble:nth-child(5) { width: 70px; height: 70px; left: 20%; top: 90%; animation-delay: 8s; }
-        .bubble:nth-child(6) { width: 45px; height: 45px; left: 90%; top: 30%; animation-delay: 10s; background-color: rgba(255, 255, 255, 0.25); }
+        .bubble:nth-child(6) { width: 45px; height: 45px; left: 90%; top: 30%; animation-delay: 10s; background-color: rgba(255, 255, 255, 0.35); }
 
 
         @keyframes backgroundShift {
@@ -71,30 +72,32 @@
         /* Main card styles */
         .card {
             background-color: #ffffff;
-            border-radius: 35px; /* Even more rounded corners */
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4); /* Deeper, softer shadow */
-            max-width: 800px; /* Increased max-width for more space */
+            border-radius: 35px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+            max-width: 800px;
             width: 100%;
-            margin: 40px auto; /* Center horizontally and provide vertical space */
-            overflow: hidden; /* Keep overflow hidden for the card itself to contain its content */
+            margin: 40px auto;
+            overflow: hidden;
             text-align: center;
             position: relative;
             z-index: 10;
-            border: 4px solid #60a5fa; /* More pronounced border */
-            transform-style: preserve-3d; /* For potential 3D effects */
-            transition: all 0.5s ease; /* General transition for the card */
-            opacity: 0; /* Initially hidden, controlled by JS for fadeInScale */
-            transform: scale(0.6); /* Initial scale for fadeInScale, controlled by JS */
-            pointer-events: none; /* Initially non-interactive, controlled by JS */
+            /* Borde más suave y amigable */
+            border: 4px solid #81d4fa; /* Light blue border */
+            transform-style: preserve-3d;
+            transition: all 0.5s ease;
+            opacity: 0;
+            transform: scale(0.6);
+            pointer-events: none;
         }
         .card::before {
             content: '';
             position: absolute;
             inset: 0;
             border-radius: 35px;
-            padding: 5px; /* Creates an animated border */
-            background: linear-gradient(45deg, #ff6b6b, #ffa07a, #ff6347, #ff6b6b);
-            background-size: 200% 200%; /* For gradient movement */
+            padding: 5px;
+            /* Gradiente de borde más pastel */
+            background: linear-gradient(45deg, #ffcdd2, #f8bbd0, #e1bee7, #c5cae9, #bbdefb, #b2ebf2, #c8e6c9);
+            background-size: 200% 200%;
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask-composite: exclude;
@@ -121,14 +124,15 @@
 
         /* Header styles */
         .header {
-            background: linear-gradient(45deg, #ff6b6b 0%, #ffa07a 50%, #ff6347 100%); /* Festive red-orange gradient */
+            /* Gradiente de encabezado más suave y amigable */
+            background: linear-gradient(45deg, #ffcdd2 0%, #bbdefb 50%, #c8e6c9 100%); /* Pink, Blue, Green pastels */
             color: white;
-            padding: 60px 20px 100px; /* More bottom padding for the photo */
+            padding: 60px 20px 100px;
             border-top-left-radius: 33px;
             border-top-right-radius: 33px;
             position: relative;
-            box-shadow: inset 0 -15px 30px rgba(0, 0, 0, 0.2); /* More pronounced inner shadow */
-            background-size: 200% 200%; /* For gradient movement */
+            box-shadow: inset 0 -15px 30px rgba(0, 0, 0, 0.2);
+            background-size: 200% 200%;
             animation: headerGradientShift 10s infinite alternate ease-in-out;
         }
 
@@ -138,16 +142,16 @@
         }
 
         .header h1 {
-            font-family: 'Great Vibes', cursive; /* Elegant and festive font */
-            font-size: 5rem; /* Much larger font size */
-            font-weight: 900; /* Bolder */
+            font-family: 'Great Vibes', cursive;
+            font-size: 5rem;
+            font-weight: 900;
             margin-bottom: 20px;
-            text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 255, 255, 0.9); /* More intense shadow and glow */
+            text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 255, 255, 0.9);
             animation: slideInDownHeader 1.8s ease-out forwards, glowText 3.5s infinite alternate;
         }
         .header p {
-            font-family: 'Pacifico', cursive; /* Complementary font */
-            font-size: 1.8rem; /* Larger font size */
+            font-family: 'Pacifico', cursive;
+            font-size: 1.8rem;
             font-weight: 600;
             animation: slideInDownHeader 2.1s ease-out forwards;
         }
@@ -170,11 +174,11 @@
 
         /* Main content */
         .content {
-            padding: 80px 50px 50px; /* Adjusted top padding to push content down for circle visibility */
+            padding: 80px 50px 50px;
         }
         .content h2 {
-            font-size: 2.8rem; /* Larger font size */
-            color: #2c3e50; /* Dark text color */
+            font-size: 2.8rem;
+            color: #424242; /* Darker gray for better contrast */
             margin-bottom: 35px;
             font-weight: 900;
             text-transform: uppercase;
@@ -193,7 +197,7 @@
         .info-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 35px; /* Space between items */
+            gap: 35px;
             margin-bottom: 45px;
         }
         @media (min-width: 640px) {
@@ -202,20 +206,21 @@
             }
         }
         .info-item {
-            background-color: #e8f5e9; /* Light green background */
-            padding: 30px; /* More padding */
-            border-radius: 25px; /* More rounded corners */
-            font-size: 1.4rem; /* Larger font size */
-            color: #2e7d32; /* Dark green text */
+            /* Colores de items de información más suaves */
+            background-color: #f1f8e9; /* Very light green */
+            padding: 30px;
+            border-radius: 25px;
+            font-size: 1.4rem;
+            color: #558b2f; /* Medium green text */
             font-weight: 700;
-            border: 3px solid #81c784; /* More pronounced border */
-            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55), box-shadow 0.5s ease; /* Elastic transition */
+            border: 3px solid #8bc34a; /* Green border */
+            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55), box-shadow 0.5s ease;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            animation: fadeInUpItem 1.2s ease-out forwards; /* Entrance animation */
-            opacity: 0; /* Initially hidden for animation */
+            animation: fadeInUpItem 1.2s ease-out forwards;
+            opacity: 0;
             transform: translateY(30px);
             position: relative;
             overflow: hidden;
@@ -231,22 +236,22 @@
         }
 
         .info-item:hover {
-            transform: translateY(-12px) scale(1.05) rotate(2deg); /* Lift, grow, and rotate effect */
-            box-shadow: 0 15px 40px rgba(46, 125, 50, 0.4); /* Shadow on hover */
-            background-color: #c8e6c9; /* Color change on hover */
+            transform: translateY(-12px) scale(1.05) rotate(2deg);
+            box-shadow: 0 15px 40px rgba(85, 139, 47, 0.4);
+            background-color: #e6ee9c; /* Lighter green on hover */
         }
         .info-item span {
             display: block;
-            font-size: 1.2rem; /* Larger font size */
-            color: #66bb6a; /* Softer text color */
+            font-size: 1.2rem;
+            color: #7cb342; /* Softer green text */
             margin-top: 12px;
             font-weight: 500;
         }
         .info-item i {
-            font-size: 2.5rem; /* Icon size */
-            color: #43a047; /* Icon color */
+            font-size: 2.5rem;
+            color: #689f38; /* Icon color */
             margin-bottom: 15px;
-            animation: bounceIcon 2.5s infinite ease-in-out; /* Subtle bounce animation */
+            animation: bounceIcon 2.5s infinite ease-in-out;
         }
         @keyframes bounceIcon {
             0%, 100% { transform: translateY(0); }
@@ -255,19 +260,20 @@
 
         /* Custom phrase section */
         .fact-section {
+            /* Colores de sección de frase más suaves */
             background-color: #fffde7; /* Very light yellow background */
-            padding: 35px; /* More padding */
-            border-radius: 25px; /* More rounded corners */
+            padding: 35px;
+            border-radius: 25px;
             margin-top: 35px;
-            border: 4px dashed #ffd600; /* More visible dashed border */
-            animation: pulseBorderFact 3s infinite alternate, shineFact 5s infinite ease-in-out; /* Pulse and shine animation */
+            border: 4px dashed #ffeb3b; /* Yellow dashed border */
+            animation: pulseBorderFact 3s infinite alternate, shineFact 5s infinite ease-in-out;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 0 25px rgba(255, 215, 0, 0.4); /* Additional shadow */
+            box-shadow: 0 0 25px rgba(255, 235, 59, 0.4);
         }
         @keyframes pulseBorderFact {
-            0% { border-color: #ffd600; box-shadow: 0 0 15px rgba(255, 215, 0, 0.6); }
-            100% { border-color: #ffc107; box-shadow: 0 0 30px rgba(255, 193, 7, 0.8); }
+            0% { border-color: #ffeb3b; box-shadow: 0 0 15px rgba(255, 235, 59, 0.6); }
+            100% { border-color: #fdd835; box-shadow: 0 0 30px rgba(253, 216, 53, 0.8); }
         }
         @keyframes shineFact {
             0% { background-position: -250% 0; }
@@ -287,41 +293,42 @@
 
         .fact-section p {
             font-style: italic;
-            color: #bf360c; /* Dark orange text */
-            font-size: 1.3rem; /* Larger font size */
+            color: #d84315; /* Dark orange text */
+            font-size: 1.3rem;
             line-height: 1.7;
             position: relative;
-            z-index: 1; /* Ensure text is above shine */
+            z-index: 1;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
         }
         .fact-section p strong {
-            color: #a11c00; /* Stronger color for the phrase */
+            color: #e64a19; /* Stronger color for the phrase */
         }
 
         /* RSVP Button */
         .rsvp-button {
-            background: linear-gradient(45deg, #4caf50 0%, #8bc34a 100%); /* More vibrant green gradient */
+            /* Gradiente de botón más suave */
+            background: linear-gradient(45deg, #81c784 0%, #a5d6a7 100%); /* Soft green gradient */
             color: white;
-            padding: 22px 45px; /* More padding */
-            border-radius: 18px; /* More rounded corners */
+            padding: 22px 45px;
+            border-radius: 18px;
             text-decoration: none;
-            font-size: 1.6rem; /* Much larger font size */
+            font-size: 1.6rem;
             font-weight: 900;
-            display: inline-flex; /* For icon and text alignment */
+            display: inline-flex;
             align-items: center;
             justify-content: center;
             margin-top: 45px;
             transition: background-color 0.5s ease, transform 0.4s ease, box-shadow 0.5s ease;
-            box-shadow: 0 12px 35px rgba(76, 175, 80, 0.7); /* Larger, colorful shadow */
+            box-shadow: 0 12px 35px rgba(129, 199, 132, 0.7); /* Soft green shadow */
             position: relative;
             overflow: hidden;
-            animation: pulseButton 2.5s infinite ease-in-out; /* Constant pulse animation */
-            border: 2px solid #66bb6a; /* Subtle border */
+            animation: pulseButton 2.5s infinite ease-in-out;
+            border: 2px solid #66bb6a;
         }
         .rsvp-button i {
-            margin-right: 18px; /* Space between icon and text */
-            font-size: 2rem; /* WhatsApp icon size */
-            animation: rotateIcon 3s infinite linear; /* Subtle icon rotation animation */
+            margin-right: 18px;
+            font-size: 2rem;
+            animation: rotateIcon 3s infinite linear;
         }
         @keyframes rotateIcon {
             0% { transform: rotate(0deg); }
@@ -329,9 +336,9 @@
         }
 
         .rsvp-button:hover {
-            background: linear-gradient(45deg, #66bb6a 0%, #aed581 100%);
-            transform: translateY(-10px) scale(1.07) rotateX(5deg); /* Lift, grow, and slight 3D rotation effect */
-            box-shadow: 0 18px 50px rgba(76, 175, 80, 0.9);
+            background: linear-gradient(45deg, #a5d6a7 0%, #c8e6c9 100%); /* Lighter green on hover */
+            transform: translateY(-10px) scale(1.07) rotateX(5deg);
+            box-shadow: 0 18px 50px rgba(129, 199, 132, 0.9);
         }
         /* Shine effect on button hover */
         .rsvp-button::after {
@@ -350,53 +357,53 @@
         }
 
         @keyframes pulseButton {
-            0% { transform: scale(1); box-shadow: 0 12px 35px rgba(76, 175, 80, 0.7); }
-            50% { transform: scale(1.03); box-shadow: 0 15px 40px rgba(76, 175, 80, 0.9); }
-            100% { transform: scale(1); box-shadow: 0 12px 35px rgba(76, 175, 80, 0.7); }
+            0% { transform: scale(1); box-shadow: 0 12px 35px rgba(129, 199, 132, 0.7); }
+            50% { transform: scale(1.03); box-shadow: 0 15px 40px rgba(129, 199, 132, 0.9); }
+            100% { transform: scale(1); box-shadow: 0 12px 35px rgba(129, 199, 132, 0.7); }
         }
 
         /* "Contact me" text */
         .contact-text {
-            color: #424242; /* Dark gray */
-            font-size: 1.2rem; /* Slightly larger font size */
+            color: #424242;
+            font-size: 1.2rem;
             font-weight: 700;
-            margin-top: 25px; /* Top space, adjusted to compensate for removed text */
-            animation: fadeIn 2s ease-out forwards; /* Fade-in animation */
+            margin-top: 25px;
+            animation: fadeIn 2s ease-out forwards;
         }
 
         /* Photo circle styles */
         .profile-circle {
-            width: 150px; /* Circle size */
+            width: 150px;
             height: 150px;
-            border-radius: 50%; /* Make it circular */
-            background-color: #f0f0f0; /* Placeholder background */
-            border: 5px solid #ffffff; /* White border */
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Shadow */
-            position: absolute; /* Absolute positioning */
-            bottom: -75px; /* Half of the circle outside the header */
+            border-radius: 50%;
+            background-color: #f0f0f0;
+            border: 5px solid #ffffff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: absolute;
+            bottom: -75px;
             left: 50%;
-            transform: translateX(-50%); /* Center horizontally */
-            overflow: hidden; /* Clip image inside the circle */
+            transform: translateX(-50%);
+            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
             font-size: 1.5rem;
             color: #b0b0b0;
             text-align: center;
-            background-size: cover; /* Ensure image covers the circle */
-            background-position: center; /* Center the image */
+            background-size: cover;
+            background-position: center;
             transition: transform 0.3s ease-in-out;
-            z-index: 15; /* Ensure it's above other elements */
+            z-index: 15;
         }
 
         .profile-circle:hover {
-            transform: translateX(-50%) scale(1.05) rotate(5deg); /* Effect on hover */
+            transform: translateX(-50%) scale(1.05) rotate(5deg);
         }
 
         .profile-circle img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Ensure image covers the circle without distortion */
+            object-fit: cover;
             border-radius: 50%;
         }
 
@@ -407,28 +414,29 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #a7e6ff 0%, #7dc9ff 50%, #4a90e2 100%); /* Match body background */
+            /* Coincidir con el nuevo fondo del cuerpo */
+            background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 50%, #80deea 100%);
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 9999; /* Ensure it's on top */
+            z-index: 9999;
             opacity: 1;
-            transition: opacity 1s ease-out; /* Smooth fade out */
+            transition: opacity 1s ease-out;
         }
 
         .preloader.hidden {
             opacity: 0;
-            pointer-events: none; /* Make it non-interactive after fade out */
+            pointer-events: none;
         }
 
         .preloader-text {
-            font-family: 'Great Vibes', cursive; /* Elegant font */
-            font-size: 5rem; /* Large text */
-            color: #ffffff; /* White text */
-            text-shadow: 0 0 10px rgba(255,255,255,0.8), 0 0 20px rgba(255,255,255,0.6); /* Glow effect */
+            font-family: 'Great Vibes', cursive;
+            font-size: 5rem;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255,255,255,0.8), 0 0 20px rgba(255,255,255,0.6);
             opacity: 0;
             transform: scale(0.8);
-            animation: textAppearAndFade 2.5s forwards; /* Animation for text */
+            animation: textAppearAndFade 2.5s forwards;
         }
 
         @keyframes textAppearAndFade {
@@ -443,20 +451,20 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%) rotate(-45deg); /* Center and rotate */
-            font-family: 'Inter', sans-serif; /* Or another elegant font */
-            font-size: 6rem; /* Increased font size for more visibility */
-            color: rgba(0, 0, 0, 0.25); /* Increased visibility */
-            pointer-events: none; /* Ensure it doesn't block clicks */
-            user-select: none; /* Prevent text selection */
-            z-index: 5; /* Below content, above card background */
-            white-space: nowrap; /* Prevent text wrapping */
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-family: 'Inter', sans-serif;
+            font-size: 6rem;
+            color: rgba(0, 0, 0, 0.15); /* Más sutil */
+            pointer-events: none;
+            user-select: none;
+            z-index: 5;
+            white-space: nowrap;
         }
 
         /* Responsive adjustment for watermark on smaller screens */
         @media (max-width: 640px) {
             .watermark {
-                font-size: 3.5rem; /* Adjusted smaller font for mobile */
+                font-size: 3.5rem;
             }
         }
     </style>
@@ -464,7 +472,7 @@
 <body>
     <!-- Preloader -->
     <div class="preloader">
-        <span class="preloader-text">Invitación</span>
+        <span class="preloader-text">¡Baby Shower!</span>
     </div>
 
     <!-- Floating background bubbles -->
@@ -480,23 +488,23 @@
         <div class="watermark">4471660425</div>
 
         <div class="header">
-            <!-- Circle for the celebrant's photo -->
-            <div class="profile-circle" style="background-image: url('https://placehold.co/150x150/cccccc/ffffff?text=Tu+Foto');">
-                <!-- You can replace the placeholder image URL with the actual celebrant's photo -->
-                <!-- <img src="URL_DE_LA_FOTO_DEL_FESTEJADO.jpg" alt="Foto del Festejado"> -->
+            <!-- Circle for the baby's photo or a baby icon -->
+            <div class="profile-circle" style="background-image: url('https://placehold.co/150x150/e0f2f7/00bcd4?text=Bebé');">
+                <!-- Puedes reemplazar la URL de la imagen con una foto del bebé o un icono de bebé -->
+                <!-- <img src="URL_DE_LA_FOTO_DEL_BEBE.jpg" alt="Foto del Bebé"> -->
             </div>
 
-            <!-- Invitation title, can be changed for birthday, graduation, etc. -->
-            <h1>¡Gran Celebración!</h1>
-            <p>Un evento que no querrás perderte</p>
+            <!-- Invitation title for Baby Shower -->
+            <h1>¡Llega la Dulce Espera!</h1>
+            <p>Celebremos juntos la llegada de nuestro bebé</p>
         </div>
         <div class="content">
             <!-- Event title -->
-            <h2>[Tu Evento: Cumpleaños / Graduación / Celebración]</h2>
+            <h2>¡Baby Shower de [Nombre del Bebé]!</h2>
 
             <p class="text-gray-700 text-xl mb-8 leading-relaxed font-medium">
-                ¡Prepárate para una jornada llena de alegría, risas, música y momentos inolvidables!
-                Tu presencia es el mejor regalo y hará de este día algo aún más especial.
+                Con mucha alegría, te invitamos a compartir este momento especial mientras esperamos la llegada de nuestro pequeño/a.
+                ¡Tu presencia es un regalo que atesoraremos!
             </p>
 
             <div class="info-grid">
@@ -520,16 +528,16 @@
 
             <div class="fact-section">
                 <p>
-                    ✨ <strong>Frase que desees a tu gusto:</strong> ¡La vida es una fiesta, y tú eres nuestro invitado de honor! ✨
+                    🍼 <strong>¡Un pequeño milagro está en camino y queremos celebrarlo contigo!</strong> 👶
                 </p>
             </div>
 
             <!-- Updated WhatsApp button -->
-            <a href="https://wa.me/524471660425?text=Hola%2C%20me%20gustar%C3%ADa%20confirmar%20mi%20asistencia%20al%20evento." target="_blank" class="rsvp-button">
+            <a href="https://wa.me/524471660425?text=Hola%2C%20me%20gustar%C3%ADa%20confirmar%20mi%20asistencia%20al%20Baby%20Shower." target="_blank" class="rsvp-button">
                 <i class="fab fa-whatsapp"></i> 4471660425
             </a>
             <p class="contact-text">
-                Contáctame
+                Contáctame para confirmar tu asistencia
             </p>
         </div>
     </div>
@@ -562,3 +570,4 @@
     </script>
 </body>
 </html>
+
