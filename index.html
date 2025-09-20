@@ -3,572 +3,786 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¡Baby Shower!</title>
-    <!-- Carga de Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Pacifico&family=Great+Vibes&display=swap" rel="stylesheet">
-    <!-- Font Awesome para iconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Invitación para Evelyn Esquivel Mendoza</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Dancing+Script:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* General body styles */
-        body {
-            font-family: 'Inter', sans-serif;
-            /* Suave gradiente de fondo para baby shower */
-            background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 50%, #80deea 100%);
-            display: block;
-            min-height: 100vh;
+        * {
             margin: 0;
-            padding: 40px 20px;
+            padding: 0;
             box-sizing: border-box;
-            position: relative;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f0e6ff, #e2d1ff);
+            color: #6b3fa0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
-            overflow-y: auto;
+            position: relative;
         }
 
-        /* Background animation with particles/stars and bubbles */
+        /* Fondo con patrones */
         body::before {
-            content: '';
+            content: "";
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at top left, rgba(255,255,255,0.1) 0%, transparent 40%),
-                        radial-gradient(circle at bottom right, rgba(255,255,255,0.1) 0%, transparent 40%);
-            animation: backgroundShift 20s infinite alternate ease-in-out;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(210, 180, 255, 0.2) 0px, transparent 40px),
+                radial-gradient(circle at 80% 70%, rgba(180, 140, 255, 0.2) 0px, transparent 40px);
             z-index: -1;
         }
-
-        /* Floating bubbles/confetti animation */
-        .bubble {
+        
+        /* Efecto de partículas */
+        .particle {
             position: fixed;
-            background-color: rgba(255, 255, 255, 0.4); /* Más visible */
             border-radius: 50%;
-            opacity: 0;
-            animation: floatBubble 15s infinite ease-in-out;
-            pointer-events: none;
-            z-index: -1;
+            opacity: 0.5;
+            z-index: 0;
+            animation: floatParticle 15s infinite linear;
         }
-        .bubble:nth-child(1) { width: 40px; height: 40px; left: 10%; top: 20%; animation-delay: 0s; }
-        .bubble:nth-child(2) { width: 60px; height: 60px; left: 80%; top: 50%; animation-delay: 2s; background-color: rgba(255, 255, 255, 0.3); }
-        .bubble:nth-child(3) { width: 30px; height: 30px; left: 30%; top: 70%; animation-delay: 4s; }
-        .bubble:nth-child(4) { width: 50px; height: 50px; left: 50%; top: 10%; animation-delay: 6s; background-color: rgba(255, 255, 255, 0.5); }
-        .bubble:nth-child(5) { width: 70px; height: 70px; left: 20%; top: 90%; animation-delay: 8s; }
-        .bubble:nth-child(6) { width: 45px; height: 45px; left: 90%; top: 30%; animation-delay: 10s; background-color: rgba(255, 255, 255, 0.35); }
-
-
-        @keyframes backgroundShift {
-            0% { background-position: 0% 50%, 100% 50%; }
-            100% { background-position: 100% 50%, 0% 50%; }
+        
+        @keyframes floatParticle {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-100vh) rotate(360deg); }
         }
-
-        @keyframes floatBubble {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-            20% { opacity: 1; }
-            80% { opacity: 1; }
-            100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; }
-        }
-
-        /* Main card styles */
-        .card {
-            background-color: #ffffff;
-            border-radius: 35px;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
-            max-width: 800px;
+        
+        /* Pantalla inicial de bienvenida */
+        .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            margin: 40px auto;
-            overflow: hidden;
-            text-align: center;
-            position: relative;
-            z-index: 10;
-            /* Borde más suave y amigable */
-            border: 4px solid #81d4fa; /* Light blue border */
-            transform-style: preserve-3d;
-            transition: all 0.5s ease;
-            opacity: 0;
-            transform: scale(0.6);
-            pointer-events: none;
-        }
-        .card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 35px;
-            padding: 5px;
-            /* Gradiente de borde más pastel */
-            background: linear-gradient(45deg, #ffcdd2, #f8bbd0, #e1bee7, #c5cae9, #bbdefb, #b2ebf2, #c8e6c9);
-            background-size: 200% 200%;
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            animation: borderPulse 3s infinite alternate ease-in-out;
-            z-index: -1;
-        }
-
-        @keyframes borderPulse {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
-        }
-
-        /* Card entrance animation - Applied by JS */
-        @keyframes fadeInScale {
-            from {
-                opacity: 0;
-                transform: scale(0.6);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        /* Header styles */
-        .header {
-            /* Gradiente de encabezado más suave y amigable */
-            background: linear-gradient(45deg, #ffcdd2 0%, #bbdefb 50%, #c8e6c9 100%); /* Pink, Blue, Green pastels */
-            color: white;
-            padding: 60px 20px 100px;
-            border-top-left-radius: 33px;
-            border-top-right-radius: 33px;
-            position: relative;
-            box-shadow: inset 0 -15px 30px rgba(0, 0, 0, 0.2);
-            background-size: 200% 200%;
-            animation: headerGradientShift 10s infinite alternate ease-in-out;
-        }
-
-        @keyframes headerGradientShift {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
-        }
-
-        .header h1 {
-            font-family: 'Great Vibes', cursive;
-            font-size: 5rem;
-            font-weight: 900;
-            margin-bottom: 20px;
-            text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 255, 255, 0.9);
-            animation: slideInDownHeader 1.8s ease-out forwards, glowText 3.5s infinite alternate;
-        }
-        .header p {
-            font-family: 'Pacifico', cursive;
-            font-size: 1.8rem;
-            font-weight: 600;
-            animation: slideInDownHeader 2.1s ease-out forwards;
-        }
-
-        /* Header animation */
-        @keyframes slideInDownHeader {
-            from {
-                transform: translateY(-100px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-        @keyframes glowText {
-            0% { text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 255, 255, 0.7); }
-            100% { text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5), 0 0 35px rgba(255, 255, 255, 1); }
-        }
-
-        /* Main content */
-        .content {
-            padding: 80px 50px 50px;
-        }
-        .content h2 {
-            font-size: 2.8rem;
-            color: #424242; /* Darker gray for better contrast */
-            margin-bottom: 35px;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
-            animation: fadeIn 1.8s ease-out forwards;
-        }
-
-        /* General fade-in animation */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* Info grid */
-        .info-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 35px;
-            margin-bottom: 45px;
-        }
-        @media (min-width: 640px) {
-            .info-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-        .info-item {
-            /* Colores de items de información más suaves */
-            background-color: #f1f8e9; /* Very light green */
-            padding: 30px;
-            border-radius: 25px;
-            font-size: 1.4rem;
-            color: #558b2f; /* Medium green text */
-            font-weight: 700;
-            border: 3px solid #8bc34a; /* Green border */
-            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55), box-shadow 0.5s ease;
+            height: 100%;
+            background: linear-gradient(135deg, #a98eda, #7b5cbf);
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            animation: fadeInUpItem 1.2s ease-out forwards;
-            opacity: 0;
-            transform: translateY(30px);
+            justify-content: center;
+            z-index: 1000;
+            transition: opacity 1.2s ease-out;
+        }
+        
+        .splash-content {
+            text-align: center;
+            animation: fadeIn 2s ease;
+        }
+        
+        .splash-screen h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+        }
+        
+        .splash-screen p {
+            color: #f0e6ff;
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+        
+        .loader {
+            width: 70px;
+            height: 70px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1.2s ease-in-out infinite;
+            margin: 0 auto;
             position: relative;
-            overflow: hidden;
         }
-        .info-item:nth-child(1) { animation-delay: 0.5s; }
-        .info-item:nth-child(2) { animation-delay: 0.7s; }
-        .info-item:nth-child(3) { animation-delay: 0.9s; }
-        .info-item:nth-child(4) { animation-delay: 1.1s; }
-
-        @keyframes fadeInUpItem {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        
+        .loader::after {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            animation: spinReverse 2s linear infinite;
         }
-
-        .info-item:hover {
-            transform: translateY(-12px) scale(1.05) rotate(2deg);
-            box-shadow: 0 15px 40px rgba(85, 139, 47, 0.4);
-            background-color: #e6ee9c; /* Lighter green on hover */
+        
+        @keyframes spinReverse {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(-360deg); }
         }
-        .info-item span {
-            display: block;
-            font-size: 1.2rem;
-            color: #7cb342; /* Softer green text */
-            margin-top: 12px;
-            font-weight: 500;
-        }
-        .info-item i {
-            font-size: 2.5rem;
-            color: #689f38; /* Icon color */
-            margin-bottom: 15px;
-            animation: bounceIcon 2.5s infinite ease-in-out;
-        }
-        @keyframes bounceIcon {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-
-        /* Custom phrase section */
-        .fact-section {
-            /* Colores de sección de frase más suaves */
-            background-color: #fffde7; /* Very light yellow background */
-            padding: 35px;
+        
+        /* Contenido principal */
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 25px;
-            margin-top: 35px;
-            border: 4px dashed #ffeb3b; /* Yellow dashed border */
-            animation: pulseBorderFact 3s infinite alternate, shineFact 5s infinite ease-in-out;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+            transition: opacity 1.2s ease, transform 1.2s ease;
+            position: relative;
+            z-index: 10;
+            border: 2px solid #d9c6ff;
+        }
+        
+        .floral-border {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .floral-top {
+            top: 0;
+            right: 0;
+            position: absolute;
+            font-size: 100px;
+            color: #c9b2ff;
+            opacity: 0.2;
+            transform: rotate(45deg);
+        }
+        
+        .floral-bottom {
+            bottom: 0;
+            left: 0;
+            position: absolute;
+            font-size: 100px;
+            color: #c9b2ff;
+            opacity: 0.2;
+            transform: rotate(-45deg);
+        }
+        
+        .header-section {
+            padding: 30px 20px 20px;
+            text-align: center;
+            background: linear-gradient(to bottom, #a98eda, #d9c6ff);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 0 25px rgba(255, 235, 59, 0.4);
         }
-        @keyframes pulseBorderFact {
-            0% { border-color: #ffeb3b; box-shadow: 0 0 15px rgba(255, 235, 59, 0.6); }
-            100% { border-color: #fdd835; box-shadow: 0 0 30px rgba(253, 216, 53, 0.8); }
+        
+        .header-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><rect fill="%23a98eda" width="100" height="100"/><path fill="%237b5cbf" d="M0 0h100v100H0z" opacity=".1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
         }
-        @keyframes shineFact {
-            0% { background-position: -250% 0; }
-            100% { background-position: 250% 0; }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
         }
-        .fact-section::before {
+        
+        .circular-photo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            background: linear-gradient(45deg, #d9c6ff, #b399ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            border: 5px solid white;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .circular-photo::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><rect fill="%23d9c6ff" width="100" height="100"/><path fill="%23b399ff" d="M0 0h100v100H0z" opacity=".2"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.4;
+        }
+        
+        .photo-content {
+            text-align: center;
+            z-index: 2;
+            position: relative;
+        }
+        
+        .photo-content i {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: pulse 2s infinite;
+            color: #7b5cbf;
+        }
+        
+        .name-title {
+            color: white;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.8rem;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            letter-spacing: 1px;
+        }
+        
+        .subtitle {
+            color: #f0e6ff;
+            font-size: 1.2rem;
+            font-style: italic;
+        }
+        
+        .message-section {
+            padding: 30px;
+            text-align: center;
+            line-height: 1.8;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%23fff" width="100" height="100"/><path fill="%23f0e6ff" d="M0 0h50v50H0z" opacity=".2"/></svg>');
+            position: relative;
+        }
+        
+        .message-section p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: #6b3fa0;
+            position: relative;
+        }
+        
+        .message-section p.highlight {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            color: #7b5cbf;
+            margin: 25px 0;
+            font-weight: bold;
+        }
+        
+        .message-section p::before {
+            content: """;
+            font-size: 3rem;
+            color: #c9b2ff;
+            position: absolute;
+            left: -15px;
+            top: -15px;
+            opacity: 0.7;
+        }
+        
+        .message-section p::after {
+            content: """;
+            font-size: 3rem;
+            color: #c9b2ff;
+            position: absolute;
+            right: -15px;
+            bottom: -30px;
+            opacity: 0.7;
+        }
+        
+        .details-section {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px 0;
+            background: rgba(240, 230, 255, 0.5);
+            border-top: 1px dashed #d9c6ff;
+            border-bottom: 1px dashed #d9c6ff;
+        }
+        
+        .detail-item {
+            text-align: center;
+            padding: 10px;
+        }
+        
+        .detail-item i {
+            font-size: 2rem;
+            color: #7b5cbf;
+            margin-bottom: 8px;
+        }
+        
+        .detail-item p {
+            font-size: 0.9rem;
+            color: #6b3fa0;
+        }
+        
+        .map-section {
+            padding: 25px;
+            background: rgba(240, 230, 255, 0.3);
+            border-bottom: 1px dashed #d9c6ff;
+        }
+        
+        .map-title {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            color: #7b5cbf;
+            font-weight: 600;
+        }
+        
+        .map-container {
+            height: 200px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            background: #e2d1ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6b3fa0;
+            font-weight: 500;
+            position: relative;
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .map-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(123, 92, 191, 0.8);
+            color: white;
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        
+        .buttons-section {
+            padding: 30px 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%23fff" width="100" height="100"/><path fill="%23f0e6ff" d="M0 0h50v50H0z" opacity=".2"/></svg>');
+        }
+        
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 18px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn::before {
             content: '';
             position: absolute;
             top: 0;
-            left: -150%;
+            left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transform: skewX(-25deg);
-            animation: shineFact 5s infinite ease-in-out;
+            background: linear-gradient(rgba(255, 255, 255, 0.2), transparent);
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
         }
-
-        .fact-section p {
-            font-style: italic;
-            color: #d84315; /* Dark orange text */
-            font-size: 1.3rem;
-            line-height: 1.7;
-            position: relative;
-            z-index: 1;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+        
+        .btn:hover::before {
+            transform: translateY(0);
         }
-        .fact-section p strong {
-            color: #e64a19; /* Stronger color for the phrase */
-        }
-
-        /* RSVP Button */
-        .rsvp-button {
-            /* Gradiente de botón más suave */
-            background: linear-gradient(45deg, #81c784 0%, #a5d6a7 100%); /* Soft green gradient */
+        
+        .btn-location {
+            background: linear-gradient(135deg, #a98eda, #7b5cbf);
             color: white;
-            padding: 22px 45px;
-            border-radius: 18px;
-            text-decoration: none;
-            font-size: 1.6rem;
-            font-weight: 900;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 45px;
-            transition: background-color 0.5s ease, transform 0.4s ease, box-shadow 0.5s ease;
-            box-shadow: 0 12px 35px rgba(129, 199, 132, 0.7); /* Soft green shadow */
-            position: relative;
-            overflow: hidden;
-            animation: pulseButton 2.5s infinite ease-in-out;
-            border: 2px solid #66bb6a;
         }
-        .rsvp-button i {
-            margin-right: 18px;
-            font-size: 2rem;
-            animation: rotateIcon 3s infinite linear;
+        
+        .btn-location:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 8px 20px rgba(123, 92, 191, 0.4);
         }
-        @keyframes rotateIcon {
+        
+        .btn-confirm {
+            background: linear-gradient(135deg, #8e7cc3, #6fa58b);
+            color: white;
+        }
+        
+        .btn-confirm:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 8px 20px rgba(111, 165, 139, 0.4);
+        }
+        
+        .floating-elements {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 5;
+        }
+        
+        .floating-element {
+            position: absolute;
+            font-size: 20px;
+            color: #a98eda;
+            opacity: 0;
+            animation: float 8s ease-in infinite;
+        }
+        
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            color: #6b3fa0;
+            font-size: 0.9rem;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        /* Animaciones */
+        @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-
-        .rsvp-button:hover {
-            background: linear-gradient(45deg, #a5d6a7 0%, #c8e6c9 100%); /* Lighter green on hover */
-            transform: translateY(-10px) scale(1.07) rotateX(5deg);
-            box-shadow: 0 18px 50px rgba(129, 199, 132, 0.9);
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        /* Shine effect on button hover */
-        .rsvp-button::after {
-            content: '';
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes float {
+            0% { 
+                transform: translateY(100vh) rotate(0deg); 
+                opacity: 0.7;
+            }
+            100% { 
+                transform: translateY(-100px) rotate(360deg); 
+                opacity: 0;
+            }
+        }
+        
+        .show-content {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        
+        .hide-splash {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        /* Efectos de brillo */
+        .glow {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+                         0 0 20px rgba(255, 255, 255, 0.5),
+                         0 0 30px rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Decoraciones adicionales */
+        .ribbon {
             position: absolute;
-            top: 0;
-            left: -200%;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.4);
-            transform: skewX(-35deg);
-            transition: all 0.8s ease;
-        }
-        .rsvp-button:hover::after {
-            left: 200%;
-        }
-
-        @keyframes pulseButton {
-            0% { transform: scale(1); box-shadow: 0 12px 35px rgba(129, 199, 132, 0.7); }
-            50% { transform: scale(1.03); box-shadow: 0 15px 40px rgba(129, 199, 132, 0.9); }
-            100% { transform: scale(1); box-shadow: 0 12px 35px rgba(129, 199, 132, 0.7); }
-        }
-
-        /* "Contact me" text */
-        .contact-text {
-            color: #424242;
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-top: 25px;
-            animation: fadeIn 2s ease-out forwards;
-        }
-
-        /* Photo circle styles */
-        .profile-circle {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background-color: #f0f0f0;
-            border: 5px solid #ffffff;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            position: absolute;
-            bottom: -75px;
-            left: 50%;
-            transform: translateX(-50%);
+            top: -5px;
+            right: -5px;
+            width: 110px;
+            height: 110px;
             overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.5rem;
-            color: #b0b0b0;
+            z-index: 20;
+        }
+        
+        .ribbon span {
+            position: absolute;
+            top: 25px;
+            right: -30px;
+            transform: rotate(45deg);
+            width: 150px;
+            padding: 5px 0;
+            background: #7b5cbf;
+            color: white;
             text-align: center;
-            background-size: cover;
-            background-position: center;
-            transition: transform 0.3s ease-in-out;
-            z-index: 15;
+            font-size: 0.9rem;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            font-weight: 600;
         }
-
-        .profile-circle:hover {
-            transform: translateX(-50%) scale(1.05) rotate(5deg);
+        
+        .ornament {
+            position: absolute;
+            font-size: 24px;
+            color: #c9b2ff;
+            z-index: 2;
+            animation: spin 10s linear infinite;
         }
-
-        .profile-circle img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        
+        .ornament-1 {
+            top: 15px;
+            left: 15px;
+        }
+        
+        .ornament-2 {
+            bottom: 15px;
+            right: 15px;
+        }
+        
+        .sparkle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: white;
             border-radius: 50%;
+            opacity: 0;
+            animation: sparkle 2s infinite;
         }
-
-        /* Preloader styles */
-        .preloader {
-            position: fixed;
+        
+        @keyframes sparkle {
+            0% { opacity: 0; transform: scale(0) rotate(0deg); }
+            50% { opacity: 1; transform: scale(1) rotate(180deg); }
+            100% { opacity: 0; transform: scale(0) rotate(360deg); }
+        }
+        
+        .frame {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 2px solid #d9c6ff;
+            border-radius: 18px;
+            pointer-events: none;
+            z-index: 4;
+        }
+        
+        .invitation-border {
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            /* Coincidir con el nuevo fondo del cuerpo */
-            background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 50%, #80deea 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            opacity: 1;
-            transition: opacity 1s ease-out;
-        }
-
-        .preloader.hidden {
-            opacity: 0;
             pointer-events: none;
+            z-index: 3;
         }
-
-        .preloader-text {
-            font-family: 'Great Vibes', cursive;
-            font-size: 5rem;
-            color: #ffffff;
-            text-shadow: 0 0 10px rgba(255,255,255,0.8), 0 0 20px rgba(255,255,255,0.6);
-            opacity: 0;
-            transform: scale(0.8);
-            animation: textAppearAndFade 2.5s forwards;
-        }
-
-        @keyframes textAppearAndFade {
-            0% { opacity: 0; transform: scale(0.8); }
-            20% { opacity: 1; transform: scale(1); }
-            80% { opacity: 1; transform: scale(1); }
-            100% { opacity: 0; transform: scale(1.2); }
-        }
-
-        /* Watermark styles */
-        .watermark {
+        
+        .corner {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-45deg);
-            font-family: 'Inter', sans-serif;
-            font-size: 6rem;
-            color: rgba(0, 0, 0, 0.15); /* Más sutil */
-            pointer-events: none;
-            user-select: none;
-            z-index: 5;
-            white-space: nowrap;
+            width: 30px;
+            height: 30px;
         }
-
-        /* Responsive adjustment for watermark on smaller screens */
-        @media (max-width: 640px) {
-            .watermark {
-                font-size: 3.5rem;
-            }
+        
+        .corner-tl {
+            top: 10px;
+            left: 10px;
+            border-top: 3px solid #c9b2ff;
+            border-left: 3px solid #c9b2ff;
+        }
+        
+        .corner-tr {
+            top: 10px;
+            right: 10px;
+            border-top: 3px solid #c9b2ff;
+            border-right: 3px solid #c9b2ff;
+        }
+        
+        .corner-bl {
+            bottom: 10px;
+            left: 10px;
+            border-bottom: 3px solid #c9b2ff;
+            border-left: 3px solid #c9b2ff;
+        }
+        
+        .corner-br {
+            bottom: 10px;
+            right: 10px;
+            border-bottom: 3px solid #c9b2ff;
+            border-right: 3px solid #c9b2ff;
         }
     </style>
 </head>
 <body>
-    <!-- Preloader -->
-    <div class="preloader">
-        <span class="preloader-text">¡Baby Shower!</span>
+    <!-- Efecto de partículas -->
+    <div id="particle-container"></div>
+    
+    <!-- Elementos flotantes -->
+    <div class="floating-elements" id="elements-container"></div>
+
+    <!-- Pantalla inicial -->
+    <div class="splash-screen" id="splashScreen">
+        <div class="splash-content">
+            <h1 class="glow">Evelyn Esquivel Mendoza</h1>
+            <p>Una invitación muy especial</p>
+            <div class="loader"></div>
+        </div>
     </div>
 
-    <!-- Floating background bubbles -->
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-
-    <div class="card">
-        <!-- Watermark -->
-        <div class="watermark">4471128067</div>
-
-        <div class="header">
-            <!-- Circle for the baby's photo or a baby icon -->
-            <div class="profile-circle" style="background-image: url('https://placehold.co/150x150/e0f2f7/00bcd4?text=Bebé');">
-                <!-- Puedes reemplazar la URL de la imagen con una foto del bebé o un icono de bebé -->
-                <!-- <img src="URL_DE_LA_FOTO_DEL_BEBE.jpg" alt="Foto del Bebé"> -->
-            </div>
-
-            <!-- Invitation title for Baby Shower -->
-            <h1>¡Llega la Dulce Espera!</h1>
-            <p>Celebremos juntos la llegada de nuestro bebé</p>
+    <!-- Contenido principal -->
+    <div class="container" id="mainContent">
+        <div class="ribbon"><span>¡Te espero!</span></div>
+        <div class="frame"></div>
+        
+        <div class="invitation-border">
+            <div class="corner corner-tl"></div>
+            <div class="corner corner-tr"></div>
+            <div class="corner corner-bl"></div>
+            <div class="corner corner-br"></div>
         </div>
-        <div class="content">
-            <!-- Event title -->
-            <h2>¡Baby Shower de [Nombre del Bebé]!</h2>
-
-            <p class="text-gray-700 text-xl mb-8 leading-relaxed font-medium">
-                Con mucha alegría, te invitamos a compartir este momento especial mientras esperamos la llegada de nuestro pequeño/a.
-                ¡Tu presencia es un regalo que atesoraremos!
-            </p>
-
-            <div class="info-grid">
-                <div class="info-item">
-                    <i class="fas fa-calendar-alt"></i>
-                    Fecha: <br> <span>[Día, DD de Mes de AAAA]</span>
-                </div>
-                <div class="info-item">
-                    <i class="fas fa-clock"></i>
-                    Hora: <br> <span>[HH:MM AM/PM]</span>
-                </div>
-                <div class="info-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    Lugar: <br> <span>[Nombre del Lugar]</span>
-                </div>
-                <div class="info-item">
-                    <i class="fas fa-location-arrow"></i>
-                    Dirección: <br> <span>[Calle, Número, Colonia, Maravatío, Michoacán]</span>
-                </div>
-            </div>
-
-            <div class="fact-section">
-                <p>
-                    🍼 <strong>¡Un pequeño milagro está en camino y queremos celebrarlo contigo!</strong> 👶
-                </p>
-            </div>
-
-            <!-- Updated WhatsApp button -->
-            <a href="https://wa.me/524471128067?text=Hola%2C%20me%20gustaria%C3%ADa%20informacion%20de%20las%20invitaciones." target="_blank" class="rsvp-button">
-                <i class="fab fa-whatsapp"></i> 4471128067
-            </a>
-            <p class="contact-text">
-                Contáctanos para mas información
-            </p>
+        
+        <div class="ornament ornament-1"><i class="fas fa-star"></i></div>
+        <div class="ornament ornament-2"><i class="fas fa-moon"></i></div>
+        
+        <div class="floral-border">
+            <div class="floral-top"><i class="fas fa-leaf"></i></div>
+            <div class="floral-bottom"><i class="fas fa-leaf"></i></div>
         </div>
+        
+        <div class="header-section">
+            <div class="header-content">
+                <div class="circular-photo">
+                    <div class="photo-content">
+                        <i class="fas fa-crown"></i>
+                        <p>Foto de Evelyn</p>
+                    </div>
+                </div>
+                <h2 class="name-title">Evelyn Esquivel Mendoza</h2>
+                <p class="subtitle">Una celebración inolvidable</p>
+            </div>
+        </div>
+        
+        <div class="message-section">
+            <p>Nos complace invitarte a compartir un momento muy especial lleno de alegría y amor.</p>
+            <p class="highlight">Tu presencia iluminará este día conmemorativo</p>
+            <p>Espero contar contigo para hacer de esta celebración un recuerdo eterno.</p>
+        </div>
+        
+        <div class="details-section">
+            <div class="detail-item">
+                <i class="far fa-calendar-alt"></i>
+                <p>Sábado 25 de Noviembre</p>
+            </div>
+            <div class="detail-item">
+                <i class="far fa-clock"></i>
+                <p>5:00 PM</p>
+            </div>
+            <div class="detail-item">
+                <i class="fas fa-glass-cheers"></i>
+                <p>Fiesta de celebración</p>
+            </div>
+        </div>
+        
+        <div class="map-section">
+            <h3 class="map-title">Ubicación del Evento</h3>
+            <div class="map-container">
+                <!-- Reemplaza el src con el embed de Google Maps real -->
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15050.47721934855!2d-99.17086842084956!3d19.427020549999654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ff3762e257dd%3A0x8b52976ce0b60f2f!2sPalacio%20de%20Bellas%20Artes!5e0!3m2!1ses!2smx!4v1690913757178!5m2!1ses!2smx" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div class="map-overlay">Salón "La Elegancia Lila"</div>
+            </div>
+        </div>
+        
+        <div class="buttons-section">
+            <button class="btn btn-location" onclick="showLocation()">
+                <i class="fas fa-map-marker-alt"></i>
+                Ver dirección completa
+            </button>
+            
+            <button class="btn btn-confirm" onclick="confirmAttendance()">
+                <i class="fab fa-whatsapp"></i>
+                Confirmar asistencia por WhatsApp
+            </button>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>Por favor confirma tu asistencia antes del 20 de Noviembre</p>
+        <p>¡Nos vemos pronto! ✨</p>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const preloader = document.querySelector('.preloader');
-            const invitationCard = document.querySelector('.card');
-
-            // Initially hide the card (CSS handles this with opacity: 0; and animation: none;)
-            // We will add a class to trigger the animation later.
-            // For now, let's ensure the card is hidden by default in CSS and only revealed by JS.
-            invitationCard.style.opacity = '0'; // Ensure it's hidden from start
-            invitationCard.style.transform = 'scale(0.6)'; // Initial scale for fadeInScale
-            invitationCard.style.pointerEvents = 'none';
-
-            setTimeout(() => {
-                preloader.style.opacity = '0'; // Start fading out preloader
-
-                preloader.addEventListener('transitionend', () => {
-                    preloader.style.display = 'none'; // Completely remove preloader from flow
-                    invitationCard.style.opacity = '1'; // Make card visible
-                    invitationCard.style.transform = 'scale(1)'; // Final scale for fadeInScale
-                    invitationCard.style.pointerEvents = 'auto'; // Make card interactive
-                    invitationCard.style.animation = 'fadeInScale 1.5s ease-out forwards'; // Trigger card animation
-                }, { once: true });
-
-            }, 2500); // Preloader text animation duration
-        });
+        // Ocultar splash screen y mostrar contenido principal después de 3 segundos
+        setTimeout(() => {
+            document.getElementById('splashScreen').classList.add('hide-splash');
+            document.getElementById('mainContent').classList.add('show-content');
+            createFloatingElements();
+            createSparkles();
+        }, 3000);
+        
+        // Crear partículas
+        function createParticles() {
+            const particleContainer = document.getElementById('particle-container');
+            const colors = ['#d9c6ff', '#c9b2ff', '#b399ff', '#a98eda', '#7b5cbf'];
+            
+            for (let i = 0; i < 100; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.animationDelay = Math.random() * 5 + 's';
+                particle.style.width = Math.random() * 15 + 5 + 'px';
+                particle.style.height = Math.random() * 15 + 5 + 'px';
+                particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.animationDuration = Math.random() * 10 + 10 + 's';
+                particleContainer.appendChild(particle);
+            }
+        }
+        
+        // Crear elementos flotantes
+        function createFloatingElements() {
+            const elementsContainer = document.getElementById('elements-container');
+            const symbols = ['✻', '✾', '❀', '✽', '❁', '✦', '✧', '★', '♡', '❦'];
+            
+            for (let i = 0; i < 25; i++) {
+                const element = document.createElement('div');
+                element.className = 'floating-element';
+                element.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+                element.style.left = Math.random() * 100 + 'vw';
+                element.style.animationDelay = Math.random() * 5 + 's';
+                element.style.fontSize = Math.random() * 20 + 15 + 'px';
+                element.style.color = ['#a98eda', '#7b5cbf', '#c9b2ff'][Math.floor(Math.random() * 3)];
+                elementsContainer.appendChild(element);
+            }
+        }
+        
+        // Crear efectos de brillo
+        function createSparkles() {
+            const container = document.getElementById('mainContent');
+            for (let i = 0; i < 20; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.top = Math.random() * 100 + '%';
+                sparkle.style.animationDelay = Math.random() * 2 + 's';
+                sparkle.style.animationDuration = Math.random() * 1 + 1.5 + 's';
+                container.appendChild(sparkle);
+            }
+        }
+        
+        // Función para mostrar la ubicación
+        function showLocation() {
+            const address = "Salón de Eventos 'La Elegancia Lila'\nAv. Principal #123, Colonia Centro\nCiudad de México, CDMX 06000";
+            alert(`El evento se realizará en:\n${address}\n\n¡Te esperamos!`);
+        }
+        
+        // Función para confirmar asistencia por WhatsApp
+        function confirmAttendance() {
+            const phoneNumber = "521234567890";
+            const message = "¡Hola Evelyn! Confirmo mi asistencia a tu evento. Estoy muy emocionado/a de celebrar contigo.";
+            window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+        }
+        
+        // Inicializar efectos
+        createParticles();
     </script>
 </body>
 </html>
-
 
