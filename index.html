@@ -569,8 +569,8 @@
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
         }
 
-        /* Control de música */
-        .music-control {
+        /* Control de música eliminado - reemplazado con decoración */
+        .decoration-control {
             position: fixed;
             bottom: 20px;
             right: 20px;
@@ -582,48 +582,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.3);
-            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation: pulse 2s infinite;
         }
 
-        .music-control:hover {
-            transform: scale(1.1);
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .music-control i {
+        .decoration-control i {
             color: white;
             font-size: 1.5rem;
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-        }
-
-        .music-notification {
-            position: fixed;
-            bottom: 80px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.9);
-            color: #DE0000;
-            padding: 10px 15px;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            animation: slideIn 0.5s ease;
-            display: none;
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateY(20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
         }
         
         /* Animaciones */
@@ -681,17 +649,11 @@
                 width: 20%;
             }
 
-            .music-control {
+            .decoration-control {
                 bottom: 15px;
                 right: 15px;
                 width: 45px;
                 height: 45px;
-            }
-
-            .music-notification {
-                bottom: 70px;
-                right: 15px;
-                font-size: 0.8rem;
             }
         }
         
@@ -778,29 +740,56 @@
             0%, 100% { opacity: 0.3; transform: scale(1); }
             50% { opacity: 0.6; transform: scale(1.2); }
         }
+        
+        /* Nuevas animaciones para compensar la falta de música */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+        
+        .floating-heart {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.5rem;
+            opacity: 0;
+            animation: floatUp 8s linear infinite;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Audio para música de fondo -->
-    <audio id="backgroundMusic" loop>
-        <!-- Múltiples fuentes para compatibilidad -->
-        <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_ec2bcaa262.mp3?filename=relaxing-piano-121069.mp3" type="audio/mpeg">
-        <source src="https://assets.mixkit.co/music/preview/mixkit-piano-soft-relax-135.mp3" type="audio/mpeg">
-        <source src="https://www.soundjay.com/music/sounds/piano-music-1.mp3" type="audio/mpeg">
-    </audio>
-
-    <!-- Control de música -->
-    <div class="music-control" id="musicControl" onclick="toggleMusic()">
-        <i class="fas fa-volume-up"></i>
-    </div>
-
-    <!-- Notificación de música -->
-    <div class="music-notification" id="musicNotification">
-        Música activada 🔊
+    <!-- Elemento decorativo en lugar del control de música -->
+    <div class="decoration-control">
+        <i class="fas fa-heart"></i>
     </div>
 
     <!-- Estrellas cayendo blancas -->
     <div class="stars-container" id="starsContainer"></div>
+    
+    <!-- Corazones flotantes -->
+    <div class="floating-hearts" id="floatingHearts"></div>
     
     <!-- Efectos de brillo -->
     <div class="glow-effect glow-1"></div>
@@ -909,13 +898,6 @@
     </div>
 
     <script>
-        // Variables para control de música
-        let backgroundMusic = document.getElementById('backgroundMusic');
-        let musicControl = document.getElementById('musicControl');
-        let musicNotification = document.getElementById('musicNotification');
-        let isMusicPlaying = false;
-        let musicStarted = false;
-
         // Crear estrellas cayendo blancas
         function createStars() {
             const starsContainer = document.getElementById('starsContainer');
@@ -930,6 +912,21 @@
                 star.style.fontSize = (Math.random() * 4 + 6) + 'px';
                 star.innerHTML = starSymbols[Math.floor(Math.random() * starSymbols.length)];
                 starsContainer.appendChild(star);
+            }
+        }
+        
+        // Crear corazones flotantes
+        function createFloatingHearts() {
+            const heartsContainer = document.getElementById('floatingHearts');
+            
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDelay = Math.random() * 8 + 's';
+                heart.style.animationDuration = Math.random() * 4 + 6 + 's';
+                heart.innerHTML = '❤';
+                heartsContainer.appendChild(heart);
             }
         }
         
@@ -1018,69 +1015,10 @@
                         setTimeout(() => {
                             document.getElementById('splashScreen').classList.add('hide-splash');
                             document.getElementById('mainContent').classList.add('show-content');
-                            
-                            // Iniciar música automáticamente cuando termine la animación
-                            startBackgroundMusic();
                         }, 1000);
                     }, 2000); // Tiempo aumentado para que el texto sea visible más tiempo
                 }, 2500); // Tiempo aumentado para asegurar que las partículas aparezcan PRIMERO
             }, 500);
-        }
-        
-        // Función para iniciar música de fondo
-        function startBackgroundMusic() {
-            if (musicStarted) return;
-            
-            try {
-                backgroundMusic.volume = 0.4; // Volumen medio para ambiente relajado
-                let playPromise = backgroundMusic.play();
-                
-                if (playPromise !== undefined) {
-                    playPromise.then(() => {
-                        // Música iniciada exitosamente
-                        isMusicPlaying = true;
-                        musicStarted = true;
-                        musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
-                        showMusicNotification("Música activada 🔊");
-                    }).catch(error => {
-                        // Error al reproducir, mostrar instrucciones
-                        console.log("Error al reproducir música automáticamente:", error);
-                        showMusicNotification("Haz clic en el botón de música para activar el audio 🎵");
-                    });
-                }
-            } catch (error) {
-                console.log("Error al reproducir música:", error);
-                showMusicNotification("Haz clic en el botón de música para activar el audio 🎵");
-            }
-        }
-        
-        // Función para mostrar notificación de música
-        function showMusicNotification(message) {
-            musicNotification.textContent = message;
-            musicNotification.style.display = 'block';
-            setTimeout(() => {
-                musicNotification.style.display = 'none';
-            }, 3000);
-        }
-        
-        // Función para controlar la música
-        function toggleMusic() {
-            if (!musicStarted) {
-                // Primera vez que se hace clic
-                startBackgroundMusic();
-                return;
-            }
-            
-            if (isMusicPlaying) {
-                backgroundMusic.pause();
-                musicControl.innerHTML = '<i class="fas fa-volume-mute"></i>';
-                showMusicNotification("Música pausada 🔇");
-            } else {
-                backgroundMusic.play();
-                musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
-                showMusicNotification("Música activada 🔊");
-            }
-            isMusicPlaying = !isMusicPlaying;
         }
         
         // Función para abrir Google Maps con navegación turn-by-turn a Quinta La Loma, Maravatío
@@ -1111,14 +1049,8 @@
         // Inicializar efectos
         window.addEventListener('load', function() {
             createStars();
+            createFloatingHearts();
             createNameParticles();
-            
-            // Mostrar instrucción de música después de un tiempo
-            setTimeout(() => {
-                if (!musicStarted) {
-                    showMusicNotification("Haz clic en el botón de música para activar el audio 🎵");
-                }
-            }, 5000);
         });
     </script>
 </body>
