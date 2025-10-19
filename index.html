@@ -788,7 +788,7 @@
                 </div>
                 <div class="detail-item">
                     <i class="fas fa-glass-cheers"></i>
-                    <p>Quinta La Loma</p>
+                    <p>Quinta La Loma, Maravatío</p>
                 </div>
             </div>
             
@@ -929,29 +929,28 @@
             }, 500);
         }
         
-        // Función para abrir Google Maps con navegación turn-by-turn
+        // Función para abrir Google Maps con navegación turn-by-turn a Quinta La Loma, Maravatío
         function openGoogleMapsNavigation() {
-            // Coordenadas de Quinta La Loma
-            const destinationLat = 19.91329032596426;
-            const destinationLng = -100.45784602468345;
+            // Usar el nombre del lugar en lugar de coordenadas para mejor precisión
+            const destination = "Quinta La Loma, Maravatío, Michoacán, México";
             
             // URL para Google Maps con navegación turn-by-turn
-            // El parámetro 'dir_action' con valor 'navigate' activa la navegación inmediata
-            const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${destinationLat},${destinationLng}&travelmode=driving&dir_action=navigate`;
+            // Usando el parámetro 'destination' con el nombre del lugar
+            const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(destination)}&travelmode=driving&dir_action=navigate`;
             
             // Abrir en nueva pestaña
             window.open(mapsUrl, '_blank');
             
             // Mensaje informativo
             setTimeout(() => {
-                alert("Se abrirá Google Maps con navegación paso a paso. Asegúrate de tener la aplicación de Google Maps instalada para la mejor experiencia de navegación GPS.");
+                alert("Se abrirá Google Maps con navegación paso a paso hacia Quinta La Loma en Maravatío. La aplicación te guiará con instrucciones de voz.");
             }, 500);
         }
         
         // Función para confirmar asistencia por WhatsApp
         function confirmAttendance() {
             const phoneNumber = "4471329602";
-            const message = "¡Hola Evelyn! Confirmo mi asistencia a tu evento en Quinta La Loma. Estoy muy emocionado/a de celebrar contigo.";
+            const message = "¡Hola Evelyn! Confirmo mi asistencia a tu evento en Quinta La Loma, Maravatío. Estoy muy emocionado/a de celebrar contigo.";
             window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
         }
         
@@ -963,4 +962,3 @@
     </script>
 </body>
 </html>
-
