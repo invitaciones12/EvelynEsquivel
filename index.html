@@ -153,6 +153,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            transition: opacity 1s ease;
         }
         
         .welcome-message {
@@ -801,9 +802,9 @@
             
             <!-- Botones -->
             <div class="buttons">
-                <button class="btn btn-location" onclick="showLocation()">
+                <button class="btn btn-location" onclick="openGoogleMapsNavigation()">
                     <i class="fas fa-map-marker-alt"></i>
-                    Ver dirección completa
+                    Iniciar Navegación GPS
                 </button>
                 
                 <button class="btn btn-confirm" onclick="confirmAttendance()">
@@ -875,6 +876,9 @@
             const nameContainer = document.getElementById('nameContainer');
             const nameText = document.getElementById('nameText');
             
+            // Asegurar que el texto esté oculto al inicio
+            nameText.style.opacity = '0';
+            
             // Crear partículas
             for (let i = 0; i < 120; i++) {
                 const particle = document.createElement('div');
@@ -885,10 +889,11 @@
                 nameContainer.appendChild(particle);
             }
             
-            // Animación mejorada y simplificada
+            // Animación MEJORADA - PRIMERO las partículas, LUEGO el texto
             setTimeout(() => {
                 const particles = document.querySelectorAll('.name-particle');
                 
+                // FASE 1: Mostrar todas las partículas primero
                 particles.forEach((particle, index) => {
                     setTimeout(() => {
                         if (index < letterPositions.length) {
@@ -901,14 +906,14 @@
                             particle.style.top = `${Math.random() * 20 + 40}%`;
                         }
                         particle.style.opacity = '1';
-                    }, index * 15);
+                    }, index * 20);
                 });
                 
-                // Mostrar texto después de que todas las partículas estén en posición
+                // FASE 2: Mostrar el texto DESPUÉS de que TODAS las partículas estén visibles
                 setTimeout(() => {
                     nameText.style.opacity = '1';
                     
-                    // Transición al contenido principal
+                    // FASE 3: Transición al contenido principal
                     setTimeout(() => {
                         particles.forEach(p => {
                             p.style.opacity = '0';
@@ -918,16 +923,29 @@
                         setTimeout(() => {
                             document.getElementById('splashScreen').classList.add('hide-splash');
                             document.getElementById('mainContent').classList.add('show-content');
-                        }, 800);
-                    }, 1500);
-                }, 1000);
+                        }, 1000);
+                    }, 2000); // Tiempo aumentado para que el texto sea visible más tiempo
+                }, 2500); // Tiempo aumentado para asegurar que las partículas aparezcan PRIMERO
             }, 500);
         }
         
-        // Función para mostrar la ubicación
-        function showLocation() {
-            const address = "Quinta La Loma\nLerma, Loma Alta\nMaravatío, Michoacan C.P. 61252";
-            alert(`El evento se realizará en:\n${address}\n\n¡Te esperamos!`);
+        // Función para abrir Google Maps con navegación turn-by-turn
+        function openGoogleMapsNavigation() {
+            // Coordenadas de Quinta La Loma
+            const destinationLat = 19.91329032596426;
+            const destinationLng = -100.45784602468345;
+            
+            // URL para Google Maps con navegación turn-by-turn
+            // El parámetro 'dir_action' con valor 'navigate' activa la navegación inmediata
+            const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${destinationLat},${destinationLng}&travelmode=driving&dir_action=navigate`;
+            
+            // Abrir en nueva pestaña
+            window.open(mapsUrl, '_blank');
+            
+            // Mensaje informativo
+            setTimeout(() => {
+                alert("Se abrirá Google Maps con navegación paso a paso. Asegúrate de tener la aplicación de Google Maps instalada para la mejor experiencia de navegación GPS.");
+            }, 500);
         }
         
         // Función para confirmar asistencia por WhatsApp
@@ -945,3 +963,4 @@
     </script>
 </body>
 </html>
+
