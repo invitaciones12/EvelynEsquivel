@@ -540,17 +540,6 @@
             box-shadow: 0 8px 25px rgba(255, 255, 255, 0.5);
         }
         
-        .btn-confirm {
-            background: rgba(255, 255, 255, 0.2);
-            color: #FFFFFF;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-        }
-        
-        .btn-confirm:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
-        }
-        
         .footer {
             margin-top: 30px;
             text-align: center;
@@ -883,16 +872,10 @@
                     <i class="fas fa-map-marker-alt"></i>
                     Iniciar Navegación GPS
                 </button>
-                
-                <button class="btn btn-confirm" onclick="confirmAttendance()">
-                    <i class="fab fa-whatsapp"></i>
-                    Confirmar asistencia
-                </button>
             </div>
         </div>
         
         <div class="footer">
-            <p>Por favor confirma tu asistencia</p>
             <p>¡Nos vemos pronto! <span class="heart">✨</span></p>
         </div>
     </div>
@@ -1037,13 +1020,6 @@
             setTimeout(() => {
                 alert("Se abrirá Google Maps con navegación paso a paso hacia Quinta La Loma en Maravatío. La aplicación te guiará con instrucciones de voz.");
             }, 500);
-        }
-        
-        // Función para confirmar asistencia por WhatsApp
-        function confirmAttendance() {
-            const phoneNumber = "4471329602";
-            const message = "¡Hola Evelyn! Confirmo mi asistencia a tu evento en Quinta La Loma, Maravatío. Estoy muy emocionado/a de celebrar contigo.";
-            window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
         }
         
         // Inicializar efectos
